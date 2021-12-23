@@ -1,0 +1,932 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>Solidity Quick Reference</title>
+
+    <style type="text/css" media="all">
+:root {
+  --original-black: rgb(33, 37, 41);
+  --topmonks-orange: #f56b23;
+  --bootstrap-gray: #727272;
+  --topmonks-black: #2e2e2e;
+}
+
+h1 {
+  color: var(--original-black);
+}
+
+h2 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+pre {
+  margin-bottom: 0px;
+}
+
+pre code {
+  color: var(--topmonks-orange);
+}
+
+p {
+  margin-bottom: 0.5rem;
+}
+
+body > header {
+  background-color: var(--topmonks-black);
+}
+
+body > header h1, h2 {
+  color: white;
+}
+
+body > header h1 {
+  font-size: 3rem;
+  margin-bottom: 0.1rem;
+}
+
+body > header h2 {
+  font-size: 1.3rem;
+}
+
+body > header a + a {
+  margin-left: 8px;
+}
+
+main {
+  font-size: 0.8rem;
+  color: var(--bootstrap-gray);
+}
+
+main h1 {
+  font-size: 1.6rem;
+}
+
+main h2 {
+  font-size: 1.2rem;
+  padding-bottom: 2px;
+  padding-top: 5px;
+  border-bottom: 2px solid black;
+  color: var(--original-black);
+}
+
+main h3 {
+  font-size: 1.0rem;
+  margin-top: 15px;
+  margin-bottom: 0px;
+  color: var(--original-black);
+}
+
+main span {
+  color: var(--bootstrap-gray);
+}
+
+main code {
+  font-size: 0.875rem;
+  color: var(--topmonks-orange);
+}
+
+main section header {
+  margin-bottom: 5px;
+}
+
+footer {
+  border-top: 1px solid rgba(0,0,0,.1);
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.original-black {
+  color: var(--original-black);
+}
+
+.logo {
+  max-width: 250px;
+}
+
+.social-icons {
+  margin-top: 0.2rem;
+}
+
+@media (max-width: 991px) {
+  body > header h1 {
+    font-size: 2rem;
+  }
+
+  .logo {
+    max-width: 150px;
+  }
+
+  .social-icons img {
+    max-width: 16px;
+  }
+}
+
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="container d-none d-sm-flex justify-content-between align-items-center pt-4 pb-4">
+        <div class="text-left">
+          <h1>Solidity Cheatsheet</h1>
+          <h2>for version 0.8.16</h2>
+        </div>
+      </div>
+
+      <div class="container d-block d-sm-none justify-content-between align-items-center pt-4 pb-4">
+        <div class="row">
+          <div class="col-12">
+            <h1>Solidity Cheatsheet</h1>
+            <h2>for version 0.4.25</h2>
+          </div>
+
+          <div class="col-12 mt-3">
+            <div class="text-right">
+              <img src="topmonks_logo.svg" alt="TopMonks logo" class="logo img-fluid" />
+
+              <div class="social-icons">
+                <a href="https://tomponks.com">
+                  <img src="globe.svg" alt="Globe icon"/>
+                </a>
+
+                <a href="https://github.com/topmonks/solidity_quick_ref">
+                  <img src="github.svg" alt="Github icon"/>
+                </a>
+
+                <a href="https://twitter.com/topmonks">
+                  <img src="twitter.svg" alt="Twitter icon"/>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container mt-3">
+      <div class="row">
+        <div class="col">
+          <p class="original-black"><code><b>bold orange</b></code> = syntax. <code>orange</code> = example. <code><i>italics</i></code> = placeholder. Things in <code>[]</code> are optional. Things in <code>{}</code> are mandatory.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+          <section>
+            <header>
+              <h2>Pragma</h2>
+              <code><b>pragma solidity ^{version};</b></code>
+              <code>pragma solidity ^0.4.25;</code>
+            </header>
+
+            <span>
+              Compiler version to use.
+            </span>
+          </section>
+
+          <section>
+            <header>
+              <h2>Comments</h2>
+              <code>// one liner</code>
+              <br />
+              <code>/* multi liner */</code>
+              <br />
+              <code>/// Natspec one liner</code>
+              <br />
+              <code>/** Natspec multi liner **/</code>
+            </header>
+
+            <span>Natspec is Doxygen-like syntax for documenting functions, arguments etc.</span>
+          </section>
+
+          <section>
+            <header>
+              <h2><a href="https://solidity.readthedocs.io/en/v0.4.25/types.html#value-types">Simple data types</a></h2>
+              <code><b><i>type</i> [public]  [constant] <i>name</i>;</b></code>
+              <br />
+              <code>uint public amount;</code>
+            </header>
+
+            <p>
+              <code>delete amount;</code> - deletes variable content
+            </p>
+
+            <p>
+              Getters are automatically generated for <code>public</code> vars. <code>constant</code> vars have to be initialized on declaration.
+            </p>
+
+            <h3>Basic types</h3>
+            <p>
+              <code>bool</code>,
+              <code>int</code>(<code>int256</code> alias),
+              <code>uint</code>(<code>uint256</code> alias),
+              <code>byte</code>(<code>bytes1</code> alias)
+            </p>
+
+            <p>
+              <span>Ints and uints also as <code>int8</code> - <code>int256</code> in steps of 8.</span>
+              <span>Bytes also as <code>bytes1</code> - <code>bytes32</code> in steps of 1.</span>
+            </p>
+          </section>
+
+          <section>
+            <header>
+              <h3>String</h3>
+              <code><b>string [storage|memory] [public] <i>name</i>;</b></code>
+              <br />
+              <code>string memo;</code>
+            </header>
+          </section>
+
+          <section>
+            <header>
+              <h3>Bytes</h3>
+              <code><b>bytes [storage|memory] [public] <i>name</i>;</b></code>
+              <br />
+              <code>bytes public myBytes;</code>
+            </header>
+
+            <p>
+              <code>myBytes.length;</code> - get bytes length
+            </p>
+
+            <p>
+              <code>myBytes.push(hex"ff");</code>
+              - append byte
+            </p>
+          </section>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+          <section>
+            <header>
+              <h2><a href="https://solidity.readthedocs.io/en/v0.4.25/types.html#address">Address type</a></h2>
+              <code><b>address [public] <i>name</i>;</b></code>
+              <br />
+              <code>address addr;</code>
+            </header>
+
+            <code>addr.balance</code>
+            <br />
+
+            <code>addr.transfer(100)</code>
+            <span>- sends 100 wei, forwards 2300 gas, throws on error</span>
+            <br />
+
+            <code>addr.send(100)</code>
+            <span>- sends 100 wei, forwards 2300 gas, returns true/false</span>
+            <br />
+
+            <code>addr.call('<i>func_signature</i>', [<i>argument</i>, ...])</code>
+            <span>- calls <i>func_signature</i> function and passes rest of the arguments to it</span>
+            <br />
+
+            <code>addr.delegatecall('<i>func_signature</i>', [<i>argument</i>, ...])</code>
+            <span>- same as call but evaluation context is set to current context</span>
+            <br />
+          </section>
+
+          <section>
+            <header>
+              <h2>Structs</h2>
+              <code><b>struct <i>name</i> { [<i>member</i>; ... ] };</b></code>
+              <br />
+            </header>
+
+            <pre><code>
+struct Person {
+  string name;
+  int age;
+}
+            </code></pre>
+
+            <code>Person customer;</code>
+            <br />
+
+
+            <code>customer = Person({ name: 'Mr. Nobody', age: 1 });</code>
+            <br />
+
+            <code>customer2 = Person('Mr. Nobody', 1);</code>
+            <br />
+
+            <code>customer.name;</code>
+            <br />
+
+            <code>customer.age = 99;</code>
+            <br />
+          </section>
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 col-xl-6">
+          <div class="row">
+            <div class="col-xs-12 col-sm-6 col-lg-12 col-xl-6">
+              <h2>Arrays</h2>
+              <section>
+                <header>
+                  <code><b><i>type</i>[<i>size</i>] [memory|storage] [public] name;</b></code>
+                  <br />
+
+                  <code>int[5] myArray;</code>
+                  <br />
+
+                  <code>int[] anotherArray;</code> - dynamic array
+                </header>
+
+                <code>delete myArray;</code>
+                <span> - clears array's content</span>
+                <br />
+
+                <code>myArray.length;</code>
+                <span> - get array's length</span>
+                <br />
+
+                <code>myArray.push(1);</code>
+                <span> - push new element to array</span>
+                <br />
+
+                <code>myArray[3];</code>
+                - get element
+                <br />
+
+                <code>myArray[3] = 8;</code>
+                - set element
+                <br />
+
+                <code>uint[] memory myArray = new uint[](5);</code>
+                - memory array with size determined at runtime. Memory arrays can't have dynamic size
+                <br />
+              </section>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-lg-12 col-xl-6">
+              <section>
+                <header>
+                  <h2>Mappings</h2>
+                  <code><b>mapping(<i>key_type</i> => <i>value_type</i>) [public] name;</b></code>
+                  <br />
+
+                  <code>mapping (address =&gt; int) funds;</code>
+                </header>
+
+                <code>funds[address] = 33;</code>
+                <span> - set value</span>
+                <br />
+
+                <code>funds[address];</code>
+                <span> - retrieve value</span>
+                <br />
+
+                <p>
+                  <span>Simple types can be used as keys. Any types can be used as values.</span>
+                </p>
+
+                <p>
+                  <span>All possible mapping keys always exists and have a default byte value of all zeroes.</span>
+                </p>
+
+                <p>
+                  <span>Can't be iterated, checked for length, retrieve which keys were set etc. Also can't be created in memory.</span>
+                </p>
+              </section>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12 d-lg-none d-xl-block">
+              <!-- Flow control markup is on 2 places to be nicely responsive. Please don't forget to modify both of them when making adjustments -->
+              <h2>Flow control</h2>
+              <section>
+                <code>
+                  <b>
+                    if (<i>condition</i>) { ... };
+                  </b>
+                </code>
+              </section>
+
+              <section>
+                <code>
+                  <b>
+                    if (<i>condition</i>) { ... } else { ... };
+                  </b>
+                </code>
+              </section>
+
+              <section>
+                <code>
+                  <b>
+                    for (<i>declaration</i>; <i>condition</i>; <i>expression</i>) { ... };
+                  </b>
+                </code>
+                <br />
+                <code>
+                  for (uint counter; counter &lt; 10; counter++) { ... };
+                </code>
+              </section>
+
+              <section>
+                <code>
+                  <b>
+                    while (<i>condition</i>) { ... };
+                  </b>
+                </code>
+              </section>
+
+              <section>
+                <code>
+                  <b>
+                    do { ... } while (<i>condition</i>);
+                  </b>
+                </code>
+              </section>
+
+              <section>
+                <code>
+                  <b>
+                    <i>condition</i> ? <i>expression</i> : <i>expression</i>;
+                  </b>
+                </code>
+              </section>
+              <br />
+              <code>continue</code>, <code>break</code> and <code>return</code> can be used to influence flow.
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-12 col-sm-6 col-lg-12 col-xl-6">
+              <section>
+                <header>
+                  <h2>Enums</h2>
+                  <code><b>enum <i>name</i> { [<i>state</i>, ...] };</b></code>
+                  <br />
+                  <code>enum Mood { Happy, Anxious, Sad };</code>
+                </header>
+
+                <code>Mood dogMood;</code>
+                <br />
+
+                <code>dogMood = Mood.Happy;</code>
+                <br />
+              </section>
+            </div>
+
+            <div class="col-xs-12 col-sm-6 col-lg-12 col-xl-6 d-lg-none d-xl-block">
+              <!-- Imports markup is on 2 places to be nicely responsive. Please don't forget to modify both of them when making adjustments -->
+              <section>
+                <h2>Imports</h2>
+                <code><b>import "<i>path</i>";</b></code>
+                <br />
+                <code><b>import * as <i>name</i> from "<i>path</i>";</b></code>
+                <br />
+                <code><b>import { <i>name</i> as <i>alias</i>|<i>name</i>, ... } from "<i>path</i>";</b></code>
+                <br />
+                <code><b>import "<i>path</i>" as <i>namespace</i>;</b></code>
+                <br />
+
+                <p>All paths are relative.</p>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row d-none d-lg-flex d-xl-none">
+        <div class="col-6">
+          <h2>Flow control</h2>
+          <section>
+            <code>
+              <b>
+                if (<i>condition</i>) { ... };
+              </b>
+            </code>
+          </section>
+
+          <section>
+            <code>
+              <b>
+                if (<i>condition</i>) { ... } else { ... };
+              </b>
+            </code>
+          </section>
+
+          <section>
+            <code>
+              <b>
+                for (<i>declaration</i>; <i>condition</i>; <i>expression</i>) { ... };
+              </b>
+            </code>
+            <br />
+            <code>
+              for (uint counter; counter &lt; 10; counter++) { ... };
+            </code>
+          </section>
+
+          <section>
+            <code>
+              <b>
+                while (<i>condition</i>) { ... };
+              </b>
+            </code>
+          </section>
+
+          <section>
+            <code>
+              <b>
+                do { ... } while (<i>condition</i>);
+              </b>
+            </code>
+          </section>
+
+          <section>
+            <code>
+              <b>
+                <i>condition</i> ? <i>expression</i> : <i>expression</i>;
+              </b>
+            </code>
+          </section>
+          <br />
+          <code>continue</code>, <code>break</code> and <code>return</code> can be used to influence flow.
+        </div>
+
+        <div class="col-6">
+          <section>
+            <h2>Imports</h2>
+            <code><b>import "<i>path</i>";</b></code>
+            <br />
+            <code><b>import * as <i>name</i> from "<i>path</i>";</b></code>
+            <br />
+            <code><b>import { <i>name</i> as <i>alias</i>|<i>name</i>, ... } from "<i>path</i>";</b></code>
+            <br />
+            <code><b>import "<i>path</i>" as <i>namespace</i>;</b></code>
+            <br />
+
+            <p>All paths are relative.</p>
+          </section>
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="row">
+        <div class="col-xs-12 col-lg-6">
+          <section>
+            <h2><a href="https://solidity.readthedocs.io/en/v0.4.25/contracts.html">Contract declaration</a></h2>
+            <pre><code>
+contract Memo {
+  string public memo;
+  address owner;
+
+  constructor(string _memo) public {
+    memo = _memo;
+    address = msg.sender;
+  }
+
+  function changeMemo(string newMemo) public onlyOwner {
+    memo = newMemo;
+  }
+
+  modifier onlyOwner {
+    require(msg.sender == owner);
+    _;
+  }
+}
+            </code></pre>
+
+            <code>Memo memo = new Memo("my precious memo");</code> - create new contract
+            <br />
+
+            <code>Memo memo = Memo(existingMemoAddress);</code> - intialize already existing contract
+            <br />
+
+            <code>this;</code> - current contract
+            <br />
+
+            <code>address(this);</code>
+            - converts contract to address
+            <br />
+
+            <code>selfdestruct(ownerAddress);</code> - destroys contract and sends it's funds to address. Must be called from contract.
+            <br />
+          </section>
+
+          <section>
+            <h2><a href="https://solidity.readthedocs.io/en/v0.4.25/contracts.html#functions">Functions</a></h2>
+
+            <code><b>function <i>name</i>([argument, ...]) [<i>visibility</i>] [view|pure] [payable] [modifier, ...] [returns([argument, ...])];</b></code>
+            <br />
+
+            <pre><code>
+function setName(string name) public { ... };
+function getName() view public returns(string name) { ... };
+function compute() private returns(int num1, int num2) { ... };
+            </code></pre>
+            <br />
+
+            <code>compute();</code>
+            - function call
+            <br />
+
+            <p>
+              <code>compute.value(300).gas(4000)();</code>
+              - call a func, send some ether along, and set it's gas limit
+            </p>
+
+            <p>
+              Visibility can be
+              <code><b>public</b></code>,
+              <code><b>private</b></code>,
+              <code><b>internal</b></code>,
+              <code><b>external</b></code>
+            </p>
+
+            <p>
+              <code><b>view</b></code> func doesn't modify blockchain anyhow.
+              <code><b>pure</b></code> func doesn't modify or read blockchain.
+            </p>
+
+            <p>
+              <code><b>payable</b></code> func can receive ether.
+            </p>
+          </section>
+        </div>
+
+        <div class="col-xs-12 col-lg-6">
+          <div class="row">
+            <div class="col-xs-12 col-xl-6">
+              <section>
+                <header>
+                  <h2><a href="https://solidity.readthedocs.io/en/v0.4.25/contracts.html#inheritance">Inheritance</a></h2>
+                  <code><b>contract <i>name</i> is [<i>ancestor</i>, ... ] { ... };</b></code>
+                </header>
+
+                <code>super.function();</code><span>- call func from first ancestor</span>
+                <br />
+
+                <code>SpecificAncestor.function();</code><span>- call func from specific ancestor</span>
+                <br />
+
+                <h3>Ancestor contructors</h3>
+                <code>contract Derived is Base(7) { ... };</code><span>- pass a static value to ancestor constructor</span>
+                <br />
+
+                <code>constructor(uint _y) Base(_y * _y) public {};</code><span>- pass a dynamic value</span>
+                <br />
+
+                <p>All ancestor constructors are called upon contract initialization and all needs to have theirs arguments set in one of the ways above.</p>
+
+              </section>
+
+              <section>
+                <h2><a href="https://solidity.readthedocs.io/en/v0.4.25/control-structures.html#error-handling-assert-require-revert-and-exceptions">require / revert / assert</a></h2>
+
+                <code><b>require(<i>condition</i>,[<i>message</i>])</b></code><span>- use for public facing assertions</span>
+                <br />
+
+                <code><b>revert([<i>message</i>])</b></code>
+                <br />
+
+                <code><b>assert(<i>condition</i>)</b></code><span>- use for internal assertions</span>
+                <br />
+
+                <span>All of these throw an error and revert current transaction.</span>
+              </section>
+
+              <section>
+                <h2>Inline assembly</h2>
+                <code><b>assembly { ... }</b></code>
+                - block with inline assembly to get closer to EVM
+              </section>
+
+              <section>
+                <h2>Deprecations</h2>
+
+                <code><b>constant</b></code>
+                <span>- function modifier</span>
+                <br />
+
+                <code><b>year</b></code>
+                <span>- time literal suffix</span>
+                <br />
+
+                <code><b>throw</b></code>
+                <span>- alias to revert</span>
+                <br />
+
+                <code><b>block.blockhash(<i>block_number</i>);</b></code>
+                <span>- replaced by global <code><b>blockhash(<i>block_number</i>);</b></code></span>
+                <br />
+
+                <code>msg.gas</code>
+                <span>- replaced by global <code><b>gasleft();</b></code></span>
+                <br />
+
+                <code>suicide</code>
+                <span>- alias to <code><b>selfdestruct(<i>address</i>)</b></code></span>
+                <br />
+
+                <code>keccak256(a, b)</code>
+                <span>- deprecated in favor of</span><code>keccak256(abi.encodePacked(a, b))</code>
+                <br />
+
+                <p>
+                  <code><b>callcode</b></code>
+                </p>
+
+                <span>Also contructors written as functions with same name as contract.</span>
+                <br />
+              </section>
+            </div>
+
+            <div class="col-xs-12 col-xl-6">
+              <section>
+                <h2><a href="https://solidity.readthedocs.io/en/v0.4.25/units-and-global-variables.html#units-and-globally-available-variables">Literals and globals</a></h2>
+                <code><b>wei</b></code>,
+                <code><b>finney</b></code>,
+                <code><b>szabo</b></code>,
+                <code><b>ether</b></code>
+                <span> - literal number suffixes for transfering numbers to wei</span>
+                <br />
+
+                <code>1000 finney == 1 ether</code>
+                <br />
+                <br />
+
+                <code><b>seconds</b></code>,
+                <code><b>minutes</b></code>,
+                <code><b>hours</b></code>,
+                <code><b>days</b></code>,
+                <code><b>weeks</b></code>
+                <span> - literal number suffixes for transfering numbers to miliseconds</span>
+                <br />
+
+                <code>60 seconds == 1 minutes</code>
+                <br />
+                <br />
+
+                <code><b>block.{method}</b></code> - current block info
+                <br />
+                <code>block.number</code>
+                <br />
+                <code>block.gaslimit</code>
+                <br />
+                ... and more
+                <br />
+                <br />
+
+
+                <code><b>msg.{method}</b></code> - various calldata
+                <code>msg.gas</code>
+                <br />
+                <code>msg.sender</code>
+                <br />
+                ... and more
+                <br />
+                <br />
+
+                <code><b>tx.{method}</b></code> - current transaction
+                <code>tx.gasprice</code>
+                <br />
+                <code>tx.origin</code>
+                <br />
+                <br />
+
+                <code><b>abi.{method}</b></code> - encoding methods
+                <code>abi.encode(arguments)</code>
+                <br />
+                <code>abi.encodePacked(arguments)</code>
+                <br />
+                ... and more
+                <br />
+                <br />
+
+                <h3>Cryptographic funcs</h3>
+                <code><b>keccak256([<i>argument</i>, ...]);</b></code>
+                <br />
+                <code><b>sha256([<i>argument</i>, ...]);</b></code>
+                <br />
+                <code><b>ripemd160([<i>argument, ...</i>]);</b></code>
+                <br />
+
+                <h3>Others</h3>
+                <code><b>this;</b></code> - current contract
+                <br />
+
+                <code><b>now;</b></code> - current time
+                <br />
+
+                <code><b>gasleft();</b></code> - remaining gas
+                <br />
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="row">
+        <div class="col-xs-12 col-lg-6">
+          <section>
+            <h2><a href="https://solidity.readthedocs.io/en/v0.4.25/contracts.html#function-modifiers">Function Modifiers</a></h2>
+            <code><b>modifier <i>name</i>([<i>argument</i>, ...]) { ... _; ... }</b></code>
+
+            <pre><code>
+modifier onlyOwner {
+  require(msg.sender == owner);
+  _;
+}
+            </code></pre>
+
+            <code><b>_;</b></code> <span>- marks where modified function call will run.</span>
+
+            <h3>Usage</h3>
+            <code>function a(int num) public onlyOwner { ... }</code>
+            <br />
+            <code>function b(int num) public onlyOwner, secondModifier { ... }</code>
+
+            <h3>Passing arguments</h3>
+            <code>function c(int num) public anotherModifier(num) { ... }</code>
+          </section>
+
+          <section>
+            <header>
+              <h2><a href="https://solidity.readthedocs.io/en/v0.4.25/contracts.html#events">Events</a></h2>
+
+              <code><b>event <i>name</i>([argument, ...]) [anonymous];</b></code>
+              <br />
+
+              <code><b>emit <i>name</i>([argument, ...]);</b></code>
+            </header>
+
+            <code>event FundTransfer(address indexed to, uint value);</code>
+            <br />
+
+            <p>
+              <code>emit FundTransfer(someAddress, 100);</code>
+            </p>
+
+            <code><b>indexed</b></code> arguments can be used for filtering later. <code><b>anonymous</b></code> event can't be filtered for by it's name.
+          </section>
+        </div>
+
+        <div class="col-xs-12 col-lg-6">
+          <section>
+            <h2><a href="https://solidity.readthedocs.io/en/v0.4.25/contracts.html#interfaces">Interfaces</a></h2>
+            <pre><code>
+interface AbstractZombie {
+  function feedOn(address target) public onlyOwner;
+  function getLevel() public view returns(uint level) onlyOwner;
+}
+            </code></pre>
+
+            <p>Interfaces are like abstract contracts which other contracts can inherit. Inheriting contract has to implement all interface methods.</p>
+            <p>Interfaces can't contain anything else than function signatures.</p>
+          </section>
+
+          <section>
+            <h2><a href="https://solidity.readthedocs.io/en/v0.4.25/contracts.html#libraries">Libraries</a></h2>
+            <pre><code>
+library MyLibrary {
+  function add(int1 num, int num2) view returns(int result) {
+    return num1 + num2;
+  }
+}
+
+contract Number {
+  int num;
+
+  using MyLibrary for int;
+
+  function addTwo() public {
+    num = num.add(42);
+  }
+}
+            </code></pre>
+            <br />
+
+            <p>In the code above functions from MyLibrary can be called directly on all <code>int</code>s. The variable itself is then passed as a first argument to the library func.</p>
+
+            <p>Library functions can also be called statically as <code>MyLibrary.add(40, 2);</code>. It's not needed to use <code><b>using</b></code> clause then.</p>
+
+            <p>Code in library <b>is executed in caller's context</b> and libraries thus see and can manipulate local state.</p>
+          </section>
+        </div>
+    </main>
+
+    <footer class="container">
+      <div class="row">
+        <div class="col-12">
+          Inspired by Topmonks.
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
